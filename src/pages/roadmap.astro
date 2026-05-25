@@ -1,0 +1,85 @@
+---
+import Button from "../components/Button.astro";
+import RoadmapItem from "../components/RoadmapItem.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const phases = [
+  {
+    phase: "Phase 1",
+    title: "Foundation",
+    items: [
+      "Fork OpenCode",
+      "Rebrand to KiduCode",
+      "Update CLI command",
+      "Launch kiducode.com",
+      "Publish GitHub repo",
+    ],
+  },
+  {
+    phase: "Phase 2",
+    title: "Language workflows",
+    items: [
+      "Manglish detection",
+      "Prompt normalization",
+      "Malayalam or Manglish explain mode",
+      "Documentation for Manglish engine",
+    ],
+  },
+  {
+    phase: "Phase 3",
+    title: "Local templates",
+    items: [
+      "Kerala-focused templates",
+      "KTU and student project helpers",
+      "Freelancer app templates",
+      "Bilingual README generator",
+    ],
+  },
+  {
+    phase: "Phase 4",
+    title: "Platform ecosystem",
+    items: [
+      "Plugin ecosystem",
+      "Provider marketplace",
+      "KiduCode Cloud waitlist",
+    ],
+  },
+  {
+    phase: "Phase 5",
+    title: "Team controls",
+    items: [
+      "Team features",
+      "Enterprise controls",
+      "SSO",
+      "Audit logs",
+      "Private deployment",
+    ],
+  },
+];
+---
+
+<BaseLayout
+  title="KiduCode Roadmap"
+  description="Detailed KiduCode roadmap covering the rebrand, Manglish Mode, Kerala-focused templates, plugin ecosystem, and future team features."
+>
+  <section class="section-grid py-16 lg:py-24">
+    <SectionHeading
+      eyebrow="Roadmap"
+      title="A staged path from rebrand to team-ready KiduCode."
+      description="The roadmap is intentionally phased so the project can stabilize its CLI identity first, then add language intelligence, templates, ecosystem support, and enterprise-grade controls."
+    />
+    <div class="mt-8">
+      <Button href={site.githubUrl} variant="secondary" external={true}>
+        Track on GitHub
+      </Button>
+    </div>
+  </section>
+
+  <section class="section-grid pb-20">
+    <div class="grid gap-5 lg:grid-cols-2">
+      {phases.map((phase) => <RoadmapItem {...phase} />)}
+    </div>
+  </section>
+</BaseLayout>

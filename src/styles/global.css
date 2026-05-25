@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --color-copy: #edf2ff;
+  --color-border: rgba(180, 190, 210, 0.16);
+  --color-brand-soft: #bdf8bc;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+body {
+  min-height: 100vh;
+  background: transparent;
+  color: var(--color-copy);
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+::selection {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
+}
+
+@layer components {
+  .surface-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: #050505;
+  }
+
+  .surface-muted {
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #0a0a0a;
+  }
+
+  .section-grid {
+    @apply mx-auto max-w-7xl px-6 sm:px-8 lg:px-10;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium uppercase tracking-[0.24em];
+    border-color: rgba(125, 223, 138, 0.2);
+    background: rgba(125, 223, 138, 0.08);
+    color: var(--color-brand-soft);
+  }
+
+  .page-title {
+    @apply text-4xl font-semibold tracking-tighter sm:text-5xl lg:text-6xl;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .page-copy {
+    @apply max-w-3xl text-base leading-7 text-slate-300 sm:text-lg;
+  }
+}

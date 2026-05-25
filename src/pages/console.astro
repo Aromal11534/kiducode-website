@@ -1,0 +1,28 @@
+---
+import Button from "../components/Button.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="KiduCode Console — Launching Soon"
+  description="The KiduCode Cloud Console is launching soon."
+>
+  <section class="section-grid py-32 lg:py-48 text-center flex flex-col items-center justify-center min-h-[60vh]">
+    <div class="inline-flex h-16 w-16 items-center justify-center rounded-lg border border-white/10 bg-white/5 font-mono text-2xl text-slate-300 mb-8">
+      ☁️
+    </div>
+    
+    <SectionHeading
+      eyebrow="Console"
+      title="Cloud console launching soon."
+      description="We're building a powerful cloud dashboard to manage your prompts, team workspaces, audit logs, and provider controls."
+      align="center"
+    />
+    
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
+      <Button href="/">Back to Home</Button>
+      <Button href="/contact" variant="secondary">Get Notified</Button>
+    </div>
+  </section>
+</BaseLayout>

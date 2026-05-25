@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="KiduCode">
+  <rect width="64" height="64" rx="14" fill="#050816" />
+  <path
+    d="M18 19L8 32l10 13"
+    fill="none"
+    stroke="#7ddf8a"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="5"
+  />
+  <path
+    d="M46 19l10 13-10 13"
+    fill="none"
+    stroke="#7ddf8a"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="5"
+  />
+  <path
+    d="M37 14L27 50"
+    fill="none"
+    stroke="#c8d77f"
+    stroke-linecap="round"
+    stroke-width="5"
+  />
+</svg>

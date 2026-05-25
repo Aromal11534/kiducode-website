@@ -1,0 +1,312 @@
+---
+import Button from "../components/Button.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import PricingCard from "../components/PricingCard.astro";
+import RoadmapItem from "../components/RoadmapItem.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import TerminalDemo from "../components/TerminalDemo.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+
+const features = [
+  {
+    title: "Manglish Mode",
+    description:
+      "Write prompts like “oru login page undakku” and KiduCode normalizes them into clear software engineering tasks.",
+    icon: "ml",
+  },
+  {
+    title: "Terminal-first",
+    description:
+      "Work directly from your command line with a fast, project-aware AI coding workflow.",
+    icon: "$_",
+  },
+  {
+    title: "Model flexible",
+    description:
+      "Connect providers like OpenAI, Claude, Gemini, local models, and future community integrations.",
+    icon: "::",
+  },
+  {
+    title: "Local-first",
+    description:
+      "Keep your codebase on your machine and choose when to connect external AI providers.",
+    icon: "hd",
+  },
+  {
+    title: "Project-aware",
+    description:
+      "KiduCode understands your files, dependencies, structure, and coding context.",
+    icon: "{}",
+  },
+  {
+    title: "Open-source core",
+    description:
+      "Fork it, customize it, self-host it, and build plugins around it.",
+    icon: "os",
+  },
+];
+
+const manglishExamples = [
+  {
+    manglish: "oru login page undakku",
+    english: "Create a login page.",
+  },
+  {
+    manglish: "ee bug fix cheyyu",
+    english: "Fix this bug.",
+  },
+  {
+    manglish: "backend il jwt auth add cheyyu",
+    english: "Add JWT authentication to the backend.",
+  },
+  {
+    manglish: "button click cheythal modal open aavanam",
+    english: "Open the modal when the button is clicked.",
+  },
+];
+
+const audiences = [
+  {
+    title: "For developers",
+    description:
+      "Use natural prompts to edit, explain, debug, and refactor code.",
+    icon: "</>",
+  },
+  {
+    title: "For students",
+    description:
+      "Understand code, prepare project documentation, and learn through Malayalam or Manglish explanations.",
+    icon: "edu",
+  },
+  {
+    title: "For freelancers",
+    description:
+      "Build client-ready dashboards, landing pages, business tools, and project templates faster.",
+    icon: "$$",
+  },
+  {
+    title: "For teams",
+    description:
+      "Use shared rules, provider controls, and enterprise-ready deployment options in the future.",
+    icon: "tm",
+  },
+];
+
+const pricing = [
+  {
+    tier: "Community",
+    description: "Free and open-source CLI.",
+    features: ["Core command-line workflow", "Open-source local-first usage", "Community-driven evolution"],
+  },
+  {
+    tier: "Pro",
+    description: "Cloud sync, prompt history, saved rules, and personal project memory.",
+    features: ["Prompt history", "Saved rules", "Personal project memory"],
+  },
+  {
+    tier: "Team",
+    description: "Shared workspaces, usage dashboard, team rules, and provider controls.",
+    features: ["Shared workspaces", "Usage dashboard", "Team rules", "Provider controls"],
+  },
+  {
+    tier: "Enterprise",
+    description: "SSO, audit logs, private deployment, compliance controls, and custom support.",
+    features: ["SSO", "Audit logs", "Private deployment", "Compliance controls", "Priority support"],
+  },
+];
+
+const roadmapPreview = [
+  "v0.1 — KiduCode rebrand and CLI foundation",
+  "v0.2 — Manglish prompt preprocessor",
+  "v0.3 — Malayalam/Manglish explanation mode",
+  "v0.4 — Kerala-focused developer templates",
+  "v0.5 — Plugin system and provider marketplace",
+  "v1.0 — Stable KiduCode release",
+];
+---
+
+<BaseLayout
+  title="KiduCode — Kerala-built open-source AI coding agent"
+  description={site.description}
+>
+  <section class="section-grid grid gap-14 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-24">
+    <div>
+      <span class="eyebrow">Kerala-built open-source AI coding agent</span>
+      <h1 class="page-title mt-6">KiduCode</h1>
+      <p class="mt-5 text-2xl font-medium tracking-tight text-brand-soft sm:text-3xl">
+        {site.tagline}
+      </p>
+      <p class="page-copy mt-6">
+        KiduCode is a Kerala-built open-source AI coding agent. Use English,
+        Malayalam, or Manglish prompts to understand, edit, refactor, and ship
+        code faster.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <Button href="/console">Console</Button>
+        <Button href={site.githubUrl} variant="secondary" external={true}>
+          View on GitHub
+        </Button>
+      </div>
+      <div class="surface-panel mt-10 rounded-xl p-6">
+        <p class="font-mono text-sm text-brand-soft">Install</p>
+        <div class="mt-4 space-y-3 font-mono text-sm text-slate-200">
+          <pre class="overflow-x-auto rounded-lg border border-white/10 bg-black/50 px-4 py-3">curl -fsSL https://kiducode.com/install | bash</pre>
+          <pre class="overflow-x-auto rounded-lg border border-dashed border-white/10 bg-black/30 px-4 py-3 text-slate-400">npm i -g kiducode</pre>
+          <pre class="overflow-x-auto rounded-lg border border-dashed border-white/10 bg-black/30 px-4 py-3 text-slate-400">brew install kiducode/tap/kiducode</pre>
+        </div>
+        <p class="mt-4 text-sm text-slate-400">
+          Install commands are placeholders until the first public release.
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-6">
+      <div class="surface-panel rounded-xl p-6">
+        <div class="flex items-center justify-between gap-4">
+          <span class="font-mono text-sm uppercase tracking-[0.24em] text-brand-soft">
+            terminal-first workflow
+          </span>
+          <span class="rounded-md border border-brand/20 bg-brand/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-brand-soft">
+            static-first site
+          </span>
+        </div>
+        <p class="mt-6 text-sm leading-7 text-slate-300">
+          Built for developers who want a minimal interface, strong local control,
+          and a command-line workflow that feels native to modern teams.
+        </p>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="surface-muted rounded-lg p-4">
+            <p class="text-sm font-medium text-white">Prompt Languages</p>
+            <p class="mt-2 text-sm text-slate-400">
+              English today. Malayalam and Manglish support planned.
+            </p>
+          </div>
+          <div class="surface-muted rounded-lg p-4">
+            <p class="text-sm font-medium text-white">Deployment Ready</p>
+            <p class="mt-2 text-sm text-slate-400">
+              Designed for Cloudflare Pages, Vercel, or Netlify.
+            </p>
+          </div>
+        </div>
+      </div>
+      <TerminalDemo />
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <SectionHeading
+      eyebrow="What Is KiduCode"
+      title="Open-source AI coding, with a Kerala-first developer experience."
+      description="KiduCode is an independent open-source fork of OpenCode, redesigned with local-first workflows, Manglish prompt support, Malayalam-friendly explanations, and a developer experience built for how Malayali developers actually think and type."
+    />
+  </section>
+
+  <section class="section-grid py-10">
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {features.map((feature) => <FeatureCard {...feature} />)}
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+      <SectionHeading
+        eyebrow="Manglish Mode"
+        title="From Manglish to modern code."
+        description="KiduCode is designed to understand the way many Kerala developers naturally type — a mix of English, Malayalam, and Manglish."
+      />
+      <div class="surface-panel rounded-xl p-6">
+        <div class="space-y-4">
+          {manglishExamples.map((example) => (
+            <div class="surface-muted rounded-lg p-4">
+              <p class="font-mono text-sm text-brand-soft">Manglish</p>
+              <p class="mt-2 font-mono text-sm text-slate-100">{example.manglish}</p>
+              <p class="mt-4 text-sm font-medium text-slate-300">English task</p>
+              <p class="mt-1 text-sm text-slate-400">{example.english}</p>
+            </div>
+          ))}
+        </div>
+        <p class="mt-5 text-sm text-slate-400">
+          Manglish Mode is planned for an upcoming KiduCode release.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <SectionHeading
+      eyebrow="Why KiduCode"
+      title="Built for developers who think locally and ship globally."
+      align="center"
+    />
+    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {audiences.map((audience) => <FeatureCard {...audience} />)}
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+      <SectionHeading
+        eyebrow="Open Source"
+        title="Open-source at the core."
+        description="The KiduCode CLI, local workflow, and Manglish engine are intended to remain open and extensible. Developers should be able to inspect it, fork it, contribute to it, and self-host it."
+      />
+      <div class="surface-panel rounded-xl p-6">
+        <p class="text-sm leading-7 text-slate-300">
+          KiduCode keeps the developer workflow front and center: local code,
+          explicit provider choice, and extensibility for teams that need to tune
+          the system around their own engineering standards.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <Button href={site.githubUrl} external={true}>Star on GitHub</Button>
+          <Button href="/roadmap" variant="secondary">Read the roadmap</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <SectionHeading
+      eyebrow="Product Philosophy"
+      title="Free for developers. Powerful for teams."
+      description="KiduCode’s core developer experience will stay open-source. Future paid offerings may focus on cloud sync, team workspaces, audit logs, enterprise controls, private deployment, and priority support."
+      align="center"
+    />
+    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {pricing.map((tier) => <PricingCard {...tier} />)}
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <div class="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+      <RoadmapItem
+        phase="Preview"
+        title="Roadmap"
+        items={roadmapPreview}
+        description="A staged path from rebrand to stable release, with language support and extensibility layered in over time."
+      />
+      <div class="surface-panel rounded-xl p-6">
+        <p class="text-sm uppercase tracking-[0.24em] text-brand-soft">Next steps</p>
+        <p class="mt-4 text-sm leading-7 text-slate-300">
+          The early roadmap focuses on establishing the KiduCode identity, shipping
+          the CLI baseline, and then layering in Manglish understanding, Malayalam
+          explanations, reusable templates, and team-grade controls.
+        </p>
+        <div class="mt-6">
+          <Button href="/roadmap">View full roadmap</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-grid py-16">
+    <div class="surface-muted rounded-xl p-6">
+      <p class="text-sm leading-7 text-slate-300">
+        KiduCode is an independent open-source fork of OpenCode. KiduCode is not
+        affiliated with, endorsed by, sponsored by, or officially connected to
+        OpenCode, Anomaly, or the original OpenCode maintainers. Original license
+        notices and upstream attribution are preserved where required.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

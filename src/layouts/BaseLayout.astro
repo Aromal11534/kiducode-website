@@ -1,0 +1,61 @@
+---
+import logo from "../assets/kiducode.png";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { site } from "../data/site";
+
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+  keywords?: string;
+}
+
+const {
+  title,
+  description,
+  path = Astro.url.pathname,
+  keywords = site.keywords,
+} = Astro.props;
+
+const canonical = new URL(path, site.domain).toString();
+const ogImage = new URL(logo.src, Astro.site ?? site.domain).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/styles.css" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="theme-color" content="#050816" />
+  </head>
+  <body class="antialiased">
+    <div class="relative min-h-screen overflow-x-hidden">
+      <div class="absolute inset-x-0 top-0 -z-10 h-[480px] bg-[radial-gradient(circle_at_top,rgba(125,223,138,0.12),transparent_60%)]"></div>
+      <Navbar />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+---
+import logo from "../assets/kiducode.png";
+import { footerColumns } from "../data/site";
+---
+
+<footer class="border-t border-white/8 py-16">
+  <div class="section-grid grid gap-10 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-[1.2fr_repeat(3,1fr)]">
+    <div class="space-y-5 sm:col-span-2 md:col-span-4 lg:col-span-1">
+      <div class="flex items-center gap-3">
+        <span class="surface-muted flex h-11 w-11 items-center justify-center rounded-2xl p-2">
+          <img src={logo.src} alt="KiduCode logo" class="max-h-full w-auto object-contain" />
+        </span>
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-soft">
+            KiduCode
+          </p>
+          <p class="text-sm text-slate-400">Naadan prompts. Production code.</p>
+        </div>
+      </div>
+      <p class="max-w-sm text-sm leading-6 text-slate-400">
+        KiduCode is an independent open-source fork of OpenCode and is not
+        affiliated with OpenCode or Anomaly.
+      </p>
+      <p class="text-sm text-slate-500">
+        © 2026 KiduCode. Independent open-source project.
+      </p>
+    </div>
+
+    {footerColumns.map((column) => (
+      <div>
+        <h2 class="text-sm font-semibold uppercase tracking-[0.2em] text-slate-200">
+          {column.title}
+        </h2>
+        <ul class="mt-5 space-y-3 text-sm text-slate-400">
+          {column.links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                target={link.external ? "_blank" : undefined}
+                rel={link.external ? "noreferrer" : undefined}
+                class="transition duration-200 hover:text-white"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</footer>

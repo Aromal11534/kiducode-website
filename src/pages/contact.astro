@@ -1,0 +1,74 @@
+---
+import Button from "../components/Button.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+
+<BaseLayout
+  title="Contact KiduCode"
+  description="Contact KiduCode for general project inquiries, security reports, and repository links."
+>
+  <section class="section-grid py-16 lg:py-24">
+    <SectionHeading
+      eyebrow="Contact"
+      title="Get in touch with KiduCode."
+      description="Use the addresses below for project questions, security topics, or early collaboration conversations. The contact form is intentionally static for now and does not submit anywhere yet."
+    />
+  </section>
+
+  <section class="section-grid pb-20">
+    <div class="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+      <article class="surface-panel rounded-[28px] p-6">
+        <h2 class="text-xl font-semibold text-white">Contact channels</h2>
+        <ul class="mt-5 space-y-4 text-sm text-slate-300">
+          <li>
+            General: <a class="text-brand-soft" href="mailto:hello@kiducode.com">hello@kiducode.com</a>
+          </li>
+          <li>
+            Security: <a class="text-brand-soft" href="mailto:security@kiducode.com">security@kiducode.com</a>
+          </li>
+          <li>
+            GitHub: <a class="text-brand-soft" href={site.githubUrl} target="_blank" rel="noreferrer">{site.githubUrl}</a>
+          </li>
+        </ul>
+        <div class="mt-6">
+          <Button href={site.githubUrl} external={true}>Open GitHub</Button>
+        </div>
+      </article>
+
+      <article class="surface-panel rounded-[28px] p-6">
+        <h2 class="text-xl font-semibold text-white">Contact form placeholder</h2>
+        <form class="mt-5 grid gap-4">
+          <label class="grid gap-2 text-sm text-slate-300">
+            Name
+            <input
+              type="text"
+              placeholder="Your name"
+              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+            />
+          </label>
+          <label class="grid gap-2 text-sm text-slate-300">
+            Email
+            <input
+              type="email"
+              placeholder="you@example.com"
+              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+            />
+          </label>
+          <label class="grid gap-2 text-sm text-slate-300">
+            Message
+            <textarea
+              rows="5"
+              placeholder="Tell us what you are building with KiduCode."
+              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+            ></textarea>
+          </label>
+          <p class="text-sm text-slate-500">
+            Placeholder only. No backend submission is connected yet.
+          </p>
+        </form>
+      </article>
+    </div>
+  </section>
+</BaseLayout>

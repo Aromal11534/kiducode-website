@@ -1,0 +1,30 @@
+---
+interface Props {
+  phase?: string;
+  title: string;
+  description?: string;
+  items: string[];
+}
+
+const { phase, title, description, items } = Astro.props;
+---
+
+<article class="surface-muted rounded-3xl p-6">
+  <div class="flex flex-wrap items-center gap-3">
+    {phase && (
+      <span class="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-brand-soft">
+        {phase}
+      </span>
+    )}
+    <h3 class="text-xl font-semibold text-white">{title}</h3>
+  </div>
+  {description && <p class="mt-4 text-sm leading-6 text-slate-300">{description}</p>}
+  <ul class="mt-5 space-y-3 text-sm text-slate-300">
+    {items.map((item) => (
+      <li class="flex items-start gap-3">
+        <span class="mt-1 font-mono text-brand-soft">✓</span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+</article>

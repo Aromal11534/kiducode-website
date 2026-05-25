@@ -1,0 +1,47 @@
+---
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = [
+  {
+    title: "Security contact",
+    body: "Report security concerns to security@kiducode.com.",
+  },
+  {
+    title: "Responsible disclosure",
+    body: "A formal disclosure workflow will be published as KiduCode approaches public release. Until then, please share issues privately by email.",
+  },
+  {
+    title: "Privacy-first approach",
+    body: "KiduCode is positioned as a local-first AI coding workflow so developers can choose when to connect external providers.",
+  },
+  {
+    title: "Bug bounty",
+    body: "There is no vulnerability bounty program yet.",
+  },
+];
+---
+
+<BaseLayout
+  title="KiduCode Security"
+  description="Security contact and responsible disclosure information for KiduCode."
+>
+  <section class="section-grid py-16 lg:py-24">
+    <SectionHeading
+      eyebrow="Security"
+      title="Security information for KiduCode."
+      description="Security processes are still early, but the site clearly documents where to report issues and how the project approaches privacy-first engineering."
+    />
+  </section>
+
+  <section class="section-grid pb-20">
+    <div class="grid gap-5 md:grid-cols-2">
+      {items.map((item) => (
+        <article class="surface-panel rounded-[28px] p-6">
+          <h2 class="text-xl font-semibold text-white">{item.title}</h2>
+          <p class="mt-3 text-sm leading-7 text-slate-300">{item.body}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

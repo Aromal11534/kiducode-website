@@ -1,0 +1,40 @@
+---
+import logo from "../assets/kiducode.png";
+import { navItems, site } from "../data/site";
+import Button from "./Button.astro";
+---
+
+<header class="sticky top-0 z-50 border-b border-white/5 bg-[#000000]/80 backdrop-blur-md">
+  <div class="section-grid flex flex-col gap-5 py-5 md:flex-row md:items-center md:justify-between">
+    <a href="/" class="flex items-center justify-center gap-3 md:justify-start">
+      <img
+        src={logo.src}
+        alt="KiduCode logo"
+        class="h-12 w-auto object-contain sm:h-14 lg:h-16"
+      />
+      <div class="max-w-[13rem]">
+        <p class="text-sm font-medium leading-5 text-slate-200">{site.tagline}</p>
+      </div>
+    </a>
+
+    <nav class="flex flex-wrap items-center justify-center gap-4 text-sm font-medium text-slate-400 md:gap-6">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="transition-colors duration-200 hover:text-white"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.githubUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="transition-colors duration-200 hover:text-white"
+      >
+        GitHub
+      </a>
+      <Button href="/console" className="ml-0 md:ml-2">Console</Button>
+    </nav>
+  </div>
+</header>

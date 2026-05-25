@@ -1,0 +1,44 @@
+---
+import Button from "../components/Button.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const enterpriseFeatures = [
+  { title: "SSO", description: "Centralized sign-in for engineering organizations.", icon: "id" },
+  { title: "RBAC", description: "Planned role-based permissions for team workflows.", icon: "rb" },
+  { title: "Audit logs", description: "Operational visibility across prompts, actions, and provider usage.", icon: "lg" },
+  { title: "Private deployment", description: "Run KiduCode in isolated infrastructure for sensitive teams.", icon: "pd" },
+  { title: "VPC or on-prem support", description: "Future deployment models for regulated or security-conscious environments.", icon: "vp" },
+  { title: "Team workspaces", description: "Shared context, prompts, and project rules for collaborative engineering.", icon: "ws" },
+  { title: "Shared rules", description: "Consistent coding instructions across repositories and teams.", icon: "sr" },
+  { title: "Usage dashboard", description: "Visibility into adoption, provider usage, and workflow activity.", icon: "db" },
+  { title: "Provider cost controls", description: "Planned governance for model access and spend.", icon: "$c" },
+  { title: "Priority support", description: "Direct support paths for production teams and partners.", icon: "ps" },
+];
+---
+
+<BaseLayout
+  title="KiduCode for teams and enterprises"
+  description="Bring open-source AI coding workflows to engineering teams with control, security, and support."
+>
+  <section class="section-grid py-16 lg:py-24">
+    <SectionHeading
+      eyebrow="Enterprise"
+      title="KiduCode for teams and enterprises."
+      description="Bring open-source AI coding workflows to engineering teams with control, security, and support."
+    />
+    <div class="mt-8 flex flex-wrap gap-3">
+      <Button href="/contact">Contact us</Button>
+      <Button href="mailto:hello@kiducode.com" variant="secondary">
+        hello@kiducode.com
+      </Button>
+    </div>
+  </section>
+
+  <section class="section-grid pb-20">
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+      {enterpriseFeatures.map((feature) => <FeatureCard {...feature} />)}
+    </div>
+  </section>
+</BaseLayout>
