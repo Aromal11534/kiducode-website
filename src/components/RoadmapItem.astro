@@ -9,10 +9,10 @@ interface Props {
 const { phase, title, description, items } = Astro.props;
 ---
 
-<article class="surface-muted rounded-3xl p-6">
+<article class="surface-muted rounded-xl p-6">
   <div class="flex flex-wrap items-center gap-3">
     {phase && (
-      <span class="rounded-full border border-brand/20 bg-brand/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-brand-soft">
+      <span class="rounded-md border border-white/10 bg-white/5 px-2.5 py-1 text-[10px] font-medium uppercase tracking-widest text-slate-300">
         {phase}
       </span>
     )}
