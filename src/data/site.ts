@@ -13,6 +13,7 @@ export const site = {
 };
 
 export const navItems = [
+  { href: "/", label: "Home" },
   { href: "/docs", label: "Docs" },
   { href: "/download", label: "Download" },
   { href: "/roadmap", label: "Roadmap" },

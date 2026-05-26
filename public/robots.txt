@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://kiducode.com/sitemap-index.xml
