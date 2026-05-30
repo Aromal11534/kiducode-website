@@ -124,11 +124,100 @@ const roadmapPreview = [
   "v0.5 — Plugin system and provider marketplace",
   "v1.0 — Stable KiduCode release",
 ];
+
+// Homepage-specific JSON-LD schemas
+const homepageJsonLd = [
+  // SoftwareApplication — tells Google this is a software product
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "KiduCode",
+    alternateName: ["Kidu Code", "KiduCode CLI", "kiducode"],
+    description: site.description,
+    url: site.domain,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "macOS, Linux, Windows",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      description: "Free and open-source community edition",
+    },
+    softwareHelp: {
+      "@type": "WebPage",
+      url: `${site.domain}/docs`,
+    },
+    downloadUrl: `${site.domain}/download`,
+    releaseNotes: `${site.domain}/roadmap`,
+    author: {
+      "@type": "Organization",
+      name: "KiduCode",
+      url: site.domain,
+    },
+    keywords: "AI coding agent, Manglish coding, Malayalam AI, open source CLI, Kerala developers",
+  },
+  // FAQPage — triggers FAQ rich snippets in Google search results
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is KiduCode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "KiduCode is a Kerala-built open-source AI coding agent. It is a terminal-first tool that lets developers write prompts in English, Malayalam, or Manglish to understand, edit, refactor, and ship code faster. It is an independent fork of OpenCode.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What is Manglish Mode in KiduCode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Manglish Mode is a planned feature that will let developers write coding prompts in Manglish (a mix of Malayalam and English), such as 'oru login page undakku'. KiduCode normalizes these into clear software engineering tasks.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is KiduCode free to use?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, KiduCode's core CLI is free and open-source under a community license. Future paid tiers (Pro, Team, Enterprise) are planned for cloud sync, team workspaces, audit logs, and enterprise controls.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I install KiduCode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "KiduCode can be installed via curl (curl -fsSL https://kiducode.com/install | bash), npm (npm i -g kiducode), or Homebrew (brew install kiducode/tap/kiducode). Install commands are placeholders until the first public release.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What AI models does KiduCode support?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "KiduCode is model-flexible. It supports connecting to providers like OpenAI, Claude, Gemini, and local models. Community integrations and a provider marketplace are planned for future releases.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is KiduCode related to OpenCode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "KiduCode is an independent open-source fork of OpenCode. It is not affiliated with, endorsed by, or officially connected to OpenCode, Anomaly, or the original OpenCode maintainers.",
+        },
+      },
+    ],
+  },
+];
 ---
 
 <BaseLayout
-  title="KiduCode — Kerala-built open-source AI coding agent"
+  title="KiduCode — Kerala-built Open-Source AI Coding Agent | Manglish & Malayalam Prompts"
   description={site.description}
+  jsonLd={homepageJsonLd}
 >
   <section class="section-grid grid gap-14 py-16 lg:grid-cols-[1.15fr_0.85fr] lg:items-center lg:py-24">
     <div class="min-w-0">

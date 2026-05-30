@@ -3,5 +3,12 @@ import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
   site: "https://kiducode.com",
-  integrations: [sitemap()],
+  trailingSlash: "never",
+  integrations: [
+    sitemap({
+      changefreq: "weekly",
+      priority: 0.7,
+      lastmod: new Date(),
+    }),
+  ],
 });

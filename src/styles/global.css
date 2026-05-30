@@ -34,6 +34,82 @@ a {
   color: inherit;
 }
 
+/* ── Focus styles for accessibility ── */
+:focus-visible {
+  outline: 2px solid rgba(125, 223, 138, 0.7);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid rgba(125, 223, 138, 0.7);
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible {
+  outline-offset: 0;
+  border-color: rgba(125, 223, 138, 0.4);
+}
+
+/* ── Skip-to-content link ── */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: #7ddf8a;
+  color: #000000;
+  font-weight: 600;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.5rem 0.5rem;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ── Scroll-triggered animations ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-on-scroll {
+  opacity: 0;
+}
+
+.animate-on-scroll.is-visible {
+  animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Stagger children */
+.animate-on-scroll.is-visible:nth-child(2) { animation-delay: 0.08s; }
+.animate-on-scroll.is-visible:nth-child(3) { animation-delay: 0.16s; }
+.animate-on-scroll.is-visible:nth-child(4) { animation-delay: 0.24s; }
+.animate-on-scroll.is-visible:nth-child(5) { animation-delay: 0.32s; }
+.animate-on-scroll.is-visible:nth-child(6) { animation-delay: 0.40s; }
+
 @layer components {
   .surface-panel {
     border: 1px solid rgba(255, 255, 255, 0.1);

@@ -5,19 +5,20 @@ import Button from "./Button.astro";
 ---
 
 <header class="sticky top-0 z-50 border-b border-white/5 bg-[#000000]/80 backdrop-blur-md">
-  <div class="section-grid flex flex-col gap-5 py-5 md:flex-row md:items-center md:justify-between">
-    <a href="/" class="flex items-center justify-center gap-3 md:justify-start">
+  <div class="section-grid flex items-center justify-between py-5">
+    <a href="/" class="flex items-center gap-3" aria-label="KiduCode home">
       <img
         src={logo.src}
         alt="KiduCode logo"
         class="h-12 w-auto object-contain sm:h-14 lg:h-16"
       />
-      <div class="max-w-[13rem]">
+      <div class="max-w-[13rem] hidden sm:block">
         <p class="text-sm font-medium leading-5 text-slate-200">{site.tagline}</p>
       </div>
     </a>
 
-    <nav class="flex flex-wrap items-center justify-center gap-4 text-sm font-medium text-slate-400 md:gap-6">
+    <!-- Desktop navigation -->
+    <nav class="hidden items-center gap-6 text-sm font-medium text-slate-400 lg:flex" aria-label="Main navigation">
       {navItems.map((item) => (
         <a
           href={item.href}
@@ -34,7 +35,118 @@ import Button from "./Button.astro";
       >
         GitHub
       </a>
-      <Button href="/console" className="ml-0 md:ml-2">Console</Button>
+      <Button href="/console" className="ml-2">Console</Button>
     </nav>
+
+    <!-- Mobile hamburger button -->
+    <button
+      id="mobile-menu-toggle"
+      class="relative flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/5 transition-colors duration-200 hover:bg-white/10 lg:hidden"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+      aria-controls="mobile-menu"
+    >
+      <div class="hamburger-icon" aria-hidden="true">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </div>
+    </button>
   </div>
+
+  <!-- Mobile menu -->
+  <nav
+    id="mobile-menu"
+    class="mobile-menu hidden border-t border-white/5 lg:hidden"
+    aria-label="Mobile navigation"
+  >
+    <div class="section-grid flex flex-col gap-1 py-4">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class="rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white"
+        >
+          {item.label}
+        </a>
+      ))}
+      <a
+        href={site.githubUrl}
+        target="_blank"
+        rel="noreferrer"
+        class="rounded-lg px-4 py-3 text-sm font-medium text-slate-300 transition-colors duration-200 hover:bg-white/5 hover:text-white"
+      >
+        GitHub
+      </a>
+      <div class="px-4 pt-2 pb-1">
+        <Button href="/console" className="w-full justify-center">Console</Button>
+      </div>
+    </div>
+  </nav>
 </header>
+
+<style>
+  .hamburger-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 18px;
+  }
+
+  .hamburger-bar {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #cbd5e1;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .hamburger-open .hamburger-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger-open .hamburger-bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-open .hamburger-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+    opacity: 0;
+  }
+
+  .mobile-menu.menu-open {
+    max-height: 500px;
+    opacity: 1;
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const icon = toggle?.querySelector(".hamburger-icon");
+
+  toggle?.addEventListener("click", () => {
+    const isOpen = menu?.classList.contains("menu-open");
+
+    if (isOpen) {
+      menu?.classList.remove("menu-open");
+      menu?.classList.add("hidden");
+      icon?.classList.remove("hamburger-open");
+      toggle.setAttribute("aria-expanded", "false");
+    } else {
+      menu?.classList.remove("hidden");
+      // Force reflow before adding animation class
+      void menu?.offsetHeight;
+      menu?.classList.add("menu-open");
+      icon?.classList.add("hamburger-open");
+      toggle.setAttribute("aria-expanded", "true");
+    }
+  });
+</script>

@@ -5,12 +5,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="KiduCode Console — Launching Soon"
-  description="The KiduCode Cloud Console is launching soon."
+  title="KiduCode Console — Cloud Dashboard for AI Coding Workflows (Coming Soon)"
+  description="The KiduCode Cloud Console is launching soon. Manage prompts, team workspaces, audit logs, and AI provider controls from a powerful cloud dashboard."
 >
   <section class="section-grid py-32 lg:py-48 text-center flex flex-col items-center justify-center min-h-[60vh]">
-    <div class="inline-flex h-16 w-16 items-center justify-center rounded-lg border border-white/10 bg-white/5 font-mono text-2xl text-slate-300 mb-8">
-      ☁️
+    <div class="inline-flex h-16 w-16 items-center justify-center rounded-lg border border-white/10 bg-white/5 mb-8 transition-transform duration-300 hover:scale-105">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="url(#cloud-gradient)" class="w-8 h-8 drop-shadow-[0_0_12px_rgba(189,248,188,0.25)]">
+        <defs>
+          <linearGradient id="cloud-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" />
+            <stop offset="100%" stop-color="#bdf8bc" />
+          </linearGradient>
+        </defs>
+        <path fill-rule="evenodd" d="M4.5 9.75a6 6 0 0 1 11.573-2.226 3.75 3.75 0 0 1 4.133 4.303A4.5 4.5 0 0 1 18 20.25H6.75a5.25 5.25 0 0 1-2.25-10.5Z" clip-rule="evenodd" />
+      </svg>
     </div>
     
     <SectionHeading
@@ -18,6 +26,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       title="Cloud console launching soon."
       description="We're building a powerful cloud dashboard to manage your prompts, team workspaces, audit logs, and provider controls."
       align="center"
+      as="h1"
     />
     
     <div class="mt-10 flex flex-wrap justify-center gap-4">

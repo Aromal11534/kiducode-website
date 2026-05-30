@@ -6,7 +6,6 @@ export default {
       colors: {
         brand: "#7ddf8a",
         "brand-soft": "#bdf8bc",
-        "brand-warm": "#c8d77f",
       },
       fontFamily: {
         sans: ["Inter", "Segoe UI", "system-ui", "sans-serif"],

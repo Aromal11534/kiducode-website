@@ -4,6 +4,7 @@ interface Props {
   title: string;
   description?: string;
   align?: "left" | "center";
+  as?: "h1" | "h2";
 }
 
 const {
@@ -11,14 +12,18 @@ const {
   title,
   description,
   align = "left",
+  as: Tag = "h2",
 } = Astro.props;
 ---
 
 <div class:list={["max-w-3xl", align === "center" && "mx-auto text-center"]}>
   {eyebrow && <span class="eyebrow">{eyebrow}</span>}
-  <h2 class="mt-4 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+  <Tag class:list={[
+    "mt-4 font-semibold tracking-tight text-white",
+    Tag === "h1" ? "text-4xl sm:text-5xl" : "text-3xl sm:text-4xl",
+  ]}>
     {title}
-  </h2>
+  </Tag>
   {description && (
     <p class="mt-4 text-base leading-7 text-slate-300 sm:text-lg">{description}</p>
   )}

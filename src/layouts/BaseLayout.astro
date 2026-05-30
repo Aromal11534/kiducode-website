@@ -9,6 +9,7 @@ interface Props {
   description: string;
   path?: string;
   keywords?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
@@ -16,10 +17,64 @@ const {
   description,
   path = Astro.url.pathname,
   keywords = site.keywords,
+  jsonLd,
 } = Astro.props;
 
 const canonical = new URL(path, site.domain).toString();
 const ogImage = new URL(logo.src, Astro.site ?? site.domain).toString();
+
+// Base JSON-LD schemas injected on every page
+const baseSchemas = [
+  // Organization schema — tells Google who "KiduCode" is
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: site.name,
+    alternateName: site.alternateName,
+    url: site.domain,
+    logo: ogImage,
+    description: site.description,
+    foundingDate: site.foundingDate,
+    founder: {
+      "@type": "Person",
+      name: site.founder,
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: site.contactEmail,
+      contactType: "customer service",
+    },
+    sameAs: site.socialProfiles,
+  },
+  // WebSite schema — enables sitelinks search box in Google
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: site.name,
+    alternateName: site.alternateName,
+    url: site.domain,
+    description: site.description,
+    publisher: {
+      "@type": "Organization",
+      name: site.name,
+      url: site.domain,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${site.domain}/docs?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  },
+];
+
+// Merge page-specific JSON-LD with base schemas
+const allSchemas = [
+  ...baseSchemas,
+  ...(Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : []),
+];
 ---
 
 <!doctype html>
@@ -31,31 +86,71 @@ const ogImage = new URL(logo.src, Astro.site ?? site.domain).toString();
     <meta name="description" content={description} />
     <meta name="keywords" content={keywords} />
     <meta name="generator" content={Astro.generator} />
+    <meta name="author" content={site.name} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
     <link rel="stylesheet" href="/styles.css" />
 
+    <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${site.name} — ${site.tagline}`} />
 
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={`${site.name} — ${site.tagline}`} />
     <meta name="theme-color" content="#050816" />
+
+    <!-- Identity verification -->
+    <link rel="me" href={site.githubUrl} />
+    <link rel="me" href={`mailto:${site.contactEmail}`} />
+
+    <!-- JSON-LD Structured Data -->
+    {allSchemas.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
   </head>
   <body class="antialiased">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="relative min-h-screen overflow-x-hidden">
       <div class="absolute inset-x-0 top-0 -z-10 h-[480px] bg-[radial-gradient(circle_at_top,rgba(125,223,138,0.12),transparent_60%)]"></div>
       <Navbar />
-      <main>
+      <main id="main-content">
         <slot />
       </main>
       <Footer />
     </div>
+
+    <!-- Scroll-triggered animation observer -->
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+      );
+
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>

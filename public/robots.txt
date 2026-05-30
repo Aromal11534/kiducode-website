@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
+Disallow: /.astro/
 
+# Sitemap
 Sitemap: https://kiducode.com/sitemap-index.xml
+
+# Crawl-delay for polite crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Host directive (Yandex)
+Host: https://kiducode.com
