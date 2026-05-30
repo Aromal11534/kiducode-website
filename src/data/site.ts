@@ -6,7 +6,7 @@ export const site = {
   discordUrl: "https://discord.gg/kiducode",
   contactEmail: "hello@kiducode.com",
   securityEmail: "security@kiducode.com",
-  tagline: "Naadan prompts. Production code.",
+  tagline: "Code in English. Prompt in Manglish. Think in Malayalam.",
   description:
     "KiduCode is a Kerala-built open-source AI coding agent with planned Manglish and Malayalam developer prompt support. Write prompts in English, Malayalam, or Manglish to understand, edit, refactor, and ship code faster from your terminal.",
   shortDescription:
