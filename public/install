@@ -409,6 +409,7 @@ add_to_path() {
         echo -e "\n# kiducode" >> "$config_file"
         echo "$command" >> "$config_file"
         print_message info "${MUTED}Successfully added ${NC}kiducode ${MUTED}to \$PATH in ${NC}$config_file"
+        print_message info "${MUTED}Restart your terminal or run:${NC} source $config_file"
     else
         print_message warning "Manually add the directory to $config_file (or similar):"
         print_message info "  $command"
