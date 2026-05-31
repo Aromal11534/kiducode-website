@@ -2,7 +2,7 @@ export const site = {
   name: "KiduCode",
   alternateName: ["Kidu Code", "KiduCode CLI", "kiducode"],
   domain: "https://kiducode.com",
-  githubUrl: "https://github.com/Aromal11534/Kiducode",
+  githubUrl: "https://github.com/kiducode-repo/kiducode",
   discordUrl: "https://discord.gg/kiducode",
   contactEmail: "hello@kiducode.com",
   securityEmail: "security@kiducode.com",
@@ -16,7 +16,7 @@ export const site = {
   foundingDate: "2025",
   founder: "Aromal",
   socialProfiles: [
-    "https://github.com/Aromal11534/Kiducode",
+    "https://github.com/kiducode-repo/kiducode",
     "https://discord.gg/kiducode",
   ],
 };
