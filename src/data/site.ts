@@ -2,10 +2,9 @@ export const site = {
   name: "KiduCode",
   alternateName: ["Kidu Code", "KiduCode CLI", "kiducode"],
   domain: "https://kiducode.com",
-  githubUrl: "https://github.com/kiducode-repo/kiducode",
+  githubUrl: "https://github.com/Aromal11534/kiducode-website",
   discordUrl: "https://discord.gg/kiducode",
-  contactEmail: "hello@kiducode.com",
-  securityEmail: "security@kiducode.com",
+  contactEmail: "team@kiducode.com",
   tagline: "Code in English. Prompt in Manglish. Think in Malayalam.",
   description:
     "KiduCode is a Kerala-built open-source AI coding agent with planned Manglish and Malayalam developer prompt support. Write prompts in English, Malayalam, or Manglish to understand, edit, refactor, and ship code faster from your terminal.",

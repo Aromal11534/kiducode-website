@@ -4,25 +4,61 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="KiduCode Privacy Policy — Local-First AI Coding Privacy Commitment"
-  description="Privacy policy for KiduCode. KiduCode is designed as a local-first, privacy-first AI coding agent. No account system or backend forms are currently active."
+  title="KiduCode Privacy Policy"
+  description="This Privacy Policy explains how KiduCode collects, uses, and protects your information, particularly concerning our Vercel OAuth integration."
 >
   <section class="section-grid py-16 lg:py-24">
     <SectionHeading
       eyebrow="Privacy"
-      title="Privacy policy placeholder"
-      description="A detailed privacy policy will be added before any hosted product features launch. Until then, the website remains a static informational site with no account system or backend forms."
+      title="Privacy Policy"
+      description="This Privacy Policy explains how KiduCode collects, uses, and protects your information, particularly concerning our Vercel OAuth integration."
       as="h1"
     />
   </section>
 
   <section class="section-grid pb-20">
-    <article class="surface-panel rounded-[28px] p-6">
-      <p class="text-sm leading-7 text-slate-300">
-        KiduCode aims for a privacy-first, local-first developer workflow.
-        Website-level privacy terms will be expanded alongside any future hosted
-        services, analytics decisions, or account-based features.
-      </p>
+    <article class="surface-panel rounded-[28px] p-8 space-y-8 text-slate-300">
+      <p class="text-sm"><strong>Effective Date:</strong> August 2026</p>
+      
+      <div>
+        <h2 class="text-xl font-semibold text-white">1. Information We Collect and Process</h2>
+        <p class="mt-2 text-sm leading-7">When you use the KiduCode Cloud Console and our integrations, we may process or store the following information to provide our services:</p>
+        <ul class="list-disc pl-5 mt-2 space-y-1 text-sm leading-7">
+          <li><strong>Vercel Integration Data:</strong> Encrypted Vercel OAuth access tokens, Vercel user and team identifiers, project and repository identifiers, deployment IDs, statuses, branches, and URLs, as well as organization and audit information.</li>
+          <li><strong>AI and Workflow Data:</strong> AI prompts submitted through the console or CLI, and the generated task results, where applicable, to improve context and maintain your coding history.</li>
+          <li><strong>Account Data:</strong> Standard profile information such as email addresses provided during registration.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">2. How We Use Your Information</h2>
+        <p class="mt-2 text-sm leading-7">We use the collected information to provide and maintain the KiduCode Cloud services, sync your coding environment with your Vercel deployments, facilitate AI code generation, and improve our platform's reliability.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">3. Data Retention and Deletion</h2>
+        <p class="mt-2 text-sm leading-7">We retain your personal data and integration metadata only for as long as your account is active or as needed to provide you services. If you choose to delete your account or disconnect an integration, all associated access tokens and metadata (such as deployment statuses and repository identifiers) are permanently deleted from our systems within 30 days. AI prompts and generated task results are retained according to your workspace settings and can be manually cleared at any time.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">4. Subprocessors and Third-Party Sharing</h2>
+        <p class="mt-2 text-sm leading-7">We do not sell your personal data. We use trusted subprocessors (such as cloud infrastructure providers and LLM API providers) strictly for the purpose of operating our services. All subprocessors are bound by strict confidentiality and data protection agreements.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">5. Security Practices</h2>
+        <p class="mt-2 text-sm leading-7">We implement industry-standard security measures, including AES-256 encryption for data at rest (such as OAuth tokens) and TLS 1.2+ for data in transit. Access to production databases is strictly controlled and audited.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">6. Account Disconnection</h2>
+        <p class="mt-2 text-sm leading-7">You may revoke KiduCode's access to your Vercel account at any time via your Vercel dashboard. Upon disconnection, KiduCode will immediately cease data collection from your Vercel account, and associated OAuth tokens will be purged.</p>
+      </div>
+
+      <div>
+        <h2 class="text-xl font-semibold text-white">7. Contact Details</h2>
+        <p class="mt-2 text-sm leading-7">If you have any questions regarding this privacy policy or your data, please contact our support team at <a class="text-brand-soft hover:underline" href="mailto:team@kiducode.com">team@kiducode.com</a>.</p>
+      </div>
     </article>
   </section>
 </BaseLayout>
