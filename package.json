@@ -8,16 +8,24 @@
     "dev:astro": "astro dev",
     "dev:css": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css --watch",
     "build": "npm run build:css && astro build",
-    "build:css": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css --minify",
-    "preview": "astro preview"
+    "build:css": "tailwindcss -i ./src/styles/global.css -o ./public/styles.css",
+    "preview": "astro preview",
+    "start": "node server.js",
+    "test": "node --test"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.3.7",
     "autoprefixer": "^10.5.0",
+    "compression": "^1.8.1",
     "concurrently": "^9.2.1",
     "express": "^5.2.1",
+    "helmet": "^8.3.0",
     "postcss": "^8.5.15",
     "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.11",
+    "@tailwindcss/typography": "^0.5.20"
   }
 }

@@ -1,0 +1,98 @@
+---
+interface Props {
+  recipient: string;
+  subject: string;
+  messagePlaceholder: string;
+}
+
+const { recipient, subject, messagePlaceholder } = Astro.props;
+const fieldPrefix = subject.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+---
+
+<form
+  class="mt-5 grid gap-4"
+  action={`mailto:${recipient}`}
+  method="post"
+  enctype="text/plain"
+  data-email-form
+  data-recipient={recipient}
+  data-subject={subject}
+>
+  <label for={`${fieldPrefix}-name`} class="grid gap-2 text-sm text-slate-300">
+    Name
+  </label>
+  <input
+    id={`${fieldPrefix}-name`}
+    name="name"
+    type="text"
+    autocomplete="name"
+    required
+    placeholder="Your name"
+    class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+  />
+
+  <label for={`${fieldPrefix}-email`} class="grid gap-2 text-sm text-slate-300">
+    Email
+  </label>
+  <input
+    id={`${fieldPrefix}-email`}
+    name="email"
+    type="email"
+    autocomplete="email"
+    required
+    placeholder="you@example.com"
+    class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+  />
+
+  <label for={`${fieldPrefix}-message`} class="grid gap-2 text-sm text-slate-300">
+    Message
+  </label>
+  <textarea
+    id={`${fieldPrefix}-message`}
+    name="message"
+    rows="5"
+    minlength="10"
+    required
+    placeholder={messagePlaceholder}
+    class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
+  ></textarea>
+
+  <p class="text-xs leading-5 text-slate-500">
+    This website opens your default email application. You can review the
+    message before sending it.
+  </p>
+  <p class="hidden text-sm text-brand-soft" data-form-status aria-live="polite"></p>
+
+  <button
+    type="submit"
+    class="mt-2 rounded-xl bg-brand-soft px-4 py-3 text-sm font-semibold text-black transition-transform hover:scale-[1.02]"
+  >
+    Open email draft
+  </button>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-email-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      const data = new FormData(form);
+      const recipient = form.dataset.recipient;
+      const subject = form.dataset.subject;
+      const name = String(data.get("name") ?? "").trim();
+      const email = String(data.get("email") ?? "").trim();
+      const message = String(data.get("message") ?? "").trim();
+
+      if (!recipient || !subject) return;
+
+      const body = [`Name: ${name}`, `Email: ${email}`, "", message].join("\n");
+      const mailto = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const status = form.querySelector<HTMLElement>("[data-form-status]");
+
+      status?.classList.remove("hidden");
+      if (status) status.textContent = "Your email draft is opening now.";
+      window.location.assign(mailto);
+    });
+  });
+</script>

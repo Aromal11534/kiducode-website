@@ -37,7 +37,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div>
         <h2 class="text-xl font-semibold text-white">3. Data Retention and Deletion</h2>
-        <p class="mt-2 text-sm leading-7">We retain your personal data and integration metadata only for as long as your account is active or as needed to provide you services. If you choose to delete your account or disconnect an integration, all associated access tokens and metadata (such as deployment statuses and repository identifiers) are permanently deleted from our systems within 30 days. AI prompts and generated task results are retained according to your workspace settings and can be manually cleared at any time.</p>
+        <p class="mt-2 text-sm leading-7">We retain your personal data and integration metadata only for as long as your account is active or as needed to provide you services. If you delete your account or disconnect an integration, we revoke the associated access tokens immediately and permanently delete stored tokens and related metadata (such as deployment statuses and repository identifiers) within 30 days. AI prompts and generated task results are retained according to your workspace settings and can be manually cleared at any time.</p>
       </div>
 
       <div>
@@ -52,7 +52,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
       <div>
         <h2 class="text-xl font-semibold text-white">6. Account Disconnection</h2>
-        <p class="mt-2 text-sm leading-7">You may revoke KiduCode's access to your Vercel account at any time via your Vercel dashboard. Upon disconnection, KiduCode will immediately cease data collection from your Vercel account, and associated OAuth tokens will be purged.</p>
+        <p class="mt-2 text-sm leading-7">You may revoke KiduCode's access to your Vercel account at any time via your Vercel dashboard. Upon disconnection, KiduCode will immediately cease data collection and revoke use of the associated OAuth tokens. Stored token records and related metadata are permanently deleted within 30 days.</p>
       </div>
 
       <div>

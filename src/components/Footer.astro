@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import logo from "../assets/kiducode.png";
 import { footerColumns } from "../data/site";
 ---
@@ -8,7 +9,7 @@ import { footerColumns } from "../data/site";
     <div class="space-y-5 sm:col-span-2 md:col-span-4 lg:col-span-1">
       <div class="flex items-center gap-3">
         <span class="surface-muted flex h-11 w-11 items-center justify-center rounded-2xl p-2">
-          <img src={logo.src} alt="KiduCode logo" class="max-h-full w-auto object-contain" />
+          <Image src={logo} alt="KiduCode logo" class="max-h-full w-auto object-contain" />
         </span>
         <div>
           <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-soft">

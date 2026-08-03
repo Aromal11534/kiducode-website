@@ -182,7 +182,8 @@ else
 
     if [ -z "$requested_version" ]; then
         url="https://github.com/kiducode-repo/kiducode/releases/latest/download/$filename"
-        specific_version=$(curl -s https://api.github.com/repos/kiducode-repo/kiducode/releases/latest | sed -n 's/.*"tag_name": *"v\([^"]*\)".*/\1/p')
+        checksum_url="$url.sha256"
+        specific_version=$(curl -fsSL https://api.github.com/repos/kiducode-repo/kiducode/releases/latest | sed -n 's/.*"tag_name": *"v\([^"]*\)".*/\1/p')
 
         if [[ $? -ne 0 || -z "$specific_version" ]]; then
             echo -e "${RED}Failed to fetch version information${NC}"
@@ -192,11 +193,15 @@ else
         # Strip leading 'v' if present
         requested_version="${requested_version#v}"
         url="https://github.com/kiducode-repo/kiducode/releases/download/v${requested_version}/$filename"
+        checksum_url="$url.sha256"
         specific_version=$requested_version
 
         # Verify the release exists before downloading
-        http_status=$(curl -sI -o /dev/null -w "%{http_code}" "https://github.com/kiducode-repo/kiducode/releases/tag/v${requested_version}")
-        if [ "$http_status" = "404" ]; then
+        if ! http_status=$(curl -sIL -o /dev/null -w "%{http_code}" "https://github.com/kiducode-repo/kiducode/releases/tag/v${requested_version}"); then
+            echo -e "${RED}Error: Could not verify release v${requested_version}${NC}"
+            exit 1
+        fi
+        if [ "$http_status" -ge 400 ]; then
             echo -e "${RED}Error: Release v${requested_version} not found${NC}"
             echo -e "${MUTED}Available releases: https://github.com/kiducode-repo/kiducode/releases${NC}"
             exit 1
@@ -274,20 +279,19 @@ download_with_progress() {
         exec 4>/dev/null
     fi
 
-    local tmp_dir=${TMPDIR:-/tmp}
-    local basename="${tmp_dir}/kiducode_install_$$"
-    local tracefile="${basename}.trace"
+    local trace_dir
+    trace_dir=$(mktemp -d "${TMPDIR:-/tmp}/kiducode_progress.XXXXXX")
+    local tracefile="${trace_dir}/trace"
 
-    rm -f "$tracefile"
     mkfifo "$tracefile"
 
     # Hide cursor
     printf "\033[?25l" >&4
 
-    trap "trap - RETURN; rm -f \"$tracefile\"; printf '\033[?25h' >&4; exec 4>&-" RETURN
+    trap "trap - RETURN; rm -rf \"$trace_dir\"; printf '\033[?25h' >&4; exec 4>&-" RETURN
 
     (
-        curl --trace-ascii "$tracefile" -s -L -o "$output" "$url"
+        curl --trace-ascii "$tracefile" --fail --show-error --silent --location -o "$output" "$url"
     ) &
     local curl_pid=$!
 
@@ -322,6 +326,39 @@ download_with_progress() {
     local ret=$?
     echo "" >&4
     return $ret
+}
+
+verify_checksum() {
+    local archive=$1
+    local checksum_file="${archive}.sha256"
+    local expected=""
+    local actual=""
+
+    if ! curl --fail --show-error --silent --location -o "$checksum_file" "$checksum_url"; then
+        echo -e "${RED}Error: Release checksum is unavailable for $filename${NC}"
+        echo -e "${MUTED}Every release must publish a matching $filename.sha256 asset.${NC}"
+        exit 1
+    fi
+
+    expected=$(awk 'NR == 1 { print tolower($1) }' "$checksum_file")
+    if [[ ! "$expected" =~ ^[0-9a-f]{64}$ ]]; then
+        echo -e "${RED}Error: Invalid checksum file for $filename${NC}"
+        exit 1
+    fi
+
+    if command -v sha256sum >/dev/null 2>&1; then
+        actual=$(sha256sum "$archive" | awk '{ print tolower($1) }')
+    elif command -v shasum >/dev/null 2>&1; then
+        actual=$(shasum -a 256 "$archive" | awk '{ print tolower($1) }')
+    else
+        echo -e "${RED}Error: sha256sum or shasum is required to verify the download.${NC}"
+        exit 1
+    fi
+
+    if [ "$actual" != "$expected" ]; then
+        echo -e "${RED}Error: Checksum verification failed for $filename${NC}"
+        exit 1
+    fi
 }
 
 create_windows_shim() {
@@ -368,13 +405,16 @@ install_binary_file() {
 
 download_and_install() {
     print_message info "\n${MUTED}Installing ${NC}kiducode ${MUTED}version: ${NC}$specific_version"
-    local tmp_dir="${TMPDIR:-/tmp}/kiducode_install_$$"
-    mkdir -p "$tmp_dir"
+    local tmp_dir
+    tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/kiducode_install.XXXXXX")
+    trap "trap - RETURN; rm -rf \"$tmp_dir\"" RETURN
 
     if [[ "$os" == "windows" ]] || ! [ -t 2 ] || ! download_with_progress "$url" "$tmp_dir/$filename"; then
         # Fallback to standard curl on Windows, non-TTY environments, or if custom progress fails
-        curl -# -L -o "$tmp_dir/$filename" "$url"
+        curl --fail --show-error --location --progress-bar -o "$tmp_dir/$filename" "$url"
     fi
+
+    verify_checksum "$tmp_dir/$filename"
 
     if [ "$os" = "linux" ]; then
         tar -xzf "$tmp_dir/$filename" -C "$tmp_dir"
@@ -383,7 +423,6 @@ download_and_install() {
     fi
 
     install_executable "$tmp_dir"
-    rm -rf "$tmp_dir"
 }
 
 install_from_binary() {

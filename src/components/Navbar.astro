@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import logo from "../assets/kiducode.png";
 import { navItems, site } from "../data/site";
 import Button from "./Button.astro";
@@ -7,8 +8,8 @@ import Button from "./Button.astro";
 <header class="sticky top-0 z-50 border-b border-white/5 bg-[#000000]/80 backdrop-blur-md">
   <div class="section-grid flex items-center justify-between py-5">
     <a href="/" class="flex items-center gap-3" aria-label="KiduCode home">
-      <img
-        src={logo.src}
+      <Image
+        src={logo}
         alt="KiduCode logo"
         class="h-12 w-auto object-contain sm:h-14 lg:h-16"
       />

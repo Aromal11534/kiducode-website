@@ -22,7 +22,7 @@ const { phase, title, description, items } = Astro.props;
   <ul class="mt-5 space-y-3 text-sm text-slate-300">
     {items.map((item) => (
       <li class="flex items-start gap-3">
-        <span class="mt-1 font-mono text-brand-soft">✓</span>
+        <span class="mt-1 font-mono text-brand-soft" aria-hidden="true">•</span>
         <span>{item}</span>
       </li>
     ))}

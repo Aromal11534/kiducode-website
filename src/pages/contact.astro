@@ -1,5 +1,6 @@
 ---
 import Button from "../components/Button.astro";
+import ContactForm from "../components/ContactForm.astro";
 import SectionHeading from "../components/SectionHeading.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
@@ -7,7 +8,7 @@ import { site } from "../data/site";
 
 <BaseLayout
   title="Contact KiduCode — Get in Touch with the Kerala AI Coding Team"
-  description="Contact the KiduCode team for project inquiries, security reports, enterprise collaboration, or open-source contributions. Reach us at hello@kiducode.com."
+  description="Contact the KiduCode team for project inquiries, security reports, enterprise collaboration, or open-source contributions. Reach us at team@kiducode.com."
 >
   <section class="section-grid py-16 lg:py-24">
     <SectionHeading
@@ -37,35 +38,11 @@ import { site } from "../data/site";
 
       <article class="surface-panel rounded-[28px] p-6">
         <h2 class="text-xl font-semibold text-white">Contact form</h2>
-        <form class="mt-5 grid gap-4">
-          <label class="grid gap-2 text-sm text-slate-300">
-            Name
-            <input
-              type="text"
-              placeholder="Your name"
-              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
-            />
-          </label>
-          <label class="grid gap-2 text-sm text-slate-300">
-            Email
-            <input
-              type="email"
-              placeholder="you@example.com"
-              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
-            />
-          </label>
-          <label class="grid gap-2 text-sm text-slate-300">
-            Message
-            <textarea
-              rows="5"
-              placeholder="Tell us what you are building with KiduCode."
-              class="rounded-2xl border border-white/10 bg-black/25 px-4 py-3 text-white outline-none ring-0 placeholder:text-slate-500"
-            ></textarea>
-          </label>
-          <button type="submit" class="mt-4 rounded-xl bg-brand-soft px-4 py-3 text-sm font-semibold text-black transition-transform hover:scale-105">
-            Send Message
-          </button>
-        </form>
+        <ContactForm
+          recipient={site.contactEmail}
+          subject="KiduCode project enquiry"
+          messagePlaceholder="Tell us what you are building with KiduCode."
+        />
       </article>
     </div>
   </section>

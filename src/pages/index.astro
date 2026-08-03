@@ -13,37 +13,37 @@ const features = [
     title: "Manglish Mode",
     description:
       "Write prompts like “oru login page undakku” and KiduCode normalizes them into clear software engineering tasks.",
-    icon: "ml",
+    iconName: "language",
   },
   {
     title: "Terminal-first",
     description:
       "Work directly from your command line with a fast, project-aware AI coding workflow.",
-    icon: "$_",
+    iconName: "terminal",
   },
   {
     title: "Model flexible",
     description:
       "Connect providers like OpenAI, Claude, Gemini, local models, and future community integrations.",
-    icon: "::",
+    iconName: "models",
   },
   {
     title: "Local-first",
     description:
       "Keep your codebase on your machine and choose when to connect external AI providers.",
-    icon: "hd",
+    iconName: "local",
   },
   {
     title: "Project-aware",
     description:
       "KiduCode understands your files, dependencies, structure, and coding context.",
-    icon: "{}",
+    iconName: "project",
   },
   {
     title: "Open-source core",
     description:
       "Fork it, customize it, self-host it, and build plugins around it.",
-    icon: "os",
+    iconName: "open-source",
   },
 ];
 
@@ -71,48 +71,87 @@ const audiences = [
     title: "For developers",
     description:
       "Use natural prompts to edit, explain, debug, and refactor code.",
-    icon: "</>",
+    iconName: "developer",
   },
   {
     title: "For students",
     description:
       "Understand code, prepare project documentation, and learn through Malayalam or Manglish explanations.",
-    icon: "edu",
+    iconName: "student",
   },
   {
     title: "For freelancers",
     description:
       "Build client-ready dashboards, landing pages, business tools, and project templates faster.",
-    icon: "$$",
+    iconName: "freelancer",
   },
   {
     title: "For teams",
     description:
       "Use shared rules, provider controls, and enterprise-ready deployment options in the future.",
-    icon: "tm",
+    iconName: "workspace",
   },
 ];
 
 const pricing = [
   {
     tier: "Community",
-    description: "Free and open-source CLI.",
-    features: ["Core command-line workflow", "Open-source local-first usage", "Community-driven evolution"],
+    price: "Free",
+    bestFor: "Local CLI users",
+    details: [
+      { label: "Credits", value: "Zen + BYOK" },
+      { label: "Projects", value: "local projects unlimited" },
+      { label: "Sandbox", value: "not available" },
+      { label: "Cloud Agents", value: "not available" },
+      { label: "history", value: "unlimited local" },
+      { label: "teams support", value: "not available" },
+      { label: "Integrations", value: "cloud sync" },
+      { label: "chatbot prompting", value: "not available" },
+    ],
+    cta: "Download KiduCode CLI",
+    href: "/download",
+    ctaVariant: "primary" as const,
+  },
+  {
+    tier: "Plus",
+    price: "₹499",
+    priceSuffix: "/month",
+    bestFor: "Students and individual developers",
+    details: [
+      { label: "Credits", value: "200" },
+      { label: "Projects", value: "3 active cloud projects" },
+      { label: "Sandbox", value: "1gb 30 min" },
+      { label: "Cloud Agents", value: "1" },
+      { label: "history", value: "7 days" },
+      { label: "teams support", value: "2 member team" },
+      { label: "Integrations", value: "cloud sync + GitHub, Vercel, Supabase" },
+      { label: "chatbot prompting", value: "WhatsApp, Discord, telegram" },
+    ],
+    footnote: "Temporary sandboxes automatically deprovision when unused.",
+    cta: "Get Plus",
+    href: "/contact?plan=plus",
   },
   {
     tier: "Pro",
-    description: "Cloud sync, prompt history, saved rules, and personal project memory.",
-    features: ["Prompt history", "Saved rules", "Personal project memory"],
-  },
-  {
-    tier: "Team",
-    description: "Shared workspaces, usage dashboard, team rules, and provider controls.",
-    features: ["Shared workspaces", "Usage dashboard", "Team rules", "Provider controls"],
-  },
-  {
-    tier: "Enterprise",
-    description: "SSO, audit logs, private deployment, compliance controls, and custom support.",
-    features: ["SSO", "Audit logs", "Private deployment", "Compliance controls", "Priority support"],
+    price: "₹1,499",
+    priceSuffix: "/month",
+    bestFor: "Professional developers and founders",
+    badge: "Most Popular",
+    includes: "Everything in Plus",
+    details: [
+      { label: "Credits", value: "600" },
+      { label: "Projects", value: "10 active cloud projects" },
+      { label: "Sandbox", value: "2gb 1 hour" },
+      { label: "Cloud Agents", value: "2" },
+      { label: "history", value: "30 days" },
+      { label: "teams support", value: "6 member teams" },
+      { label: "Integrations", value: "cloud sync + GitHub, Vercel, Supabase" },
+      { label: "chatbot prompting", value: "WhatsApp, Discord, telegram" },
+    ],
+    footnote: "Temporary sandboxes automatically deprovision when unused.",
+    cta: "Get Pro",
+    href: "/contact?plan=pro",
+    ctaVariant: "primary" as const,
   },
 ];
 
@@ -137,12 +176,29 @@ const homepageJsonLd = [
     url: site.domain,
     applicationCategory: "DeveloperApplication",
     operatingSystem: "macOS, Linux, Windows",
-    offers: {
-      "@type": "Offer",
-      price: "0",
-      priceCurrency: "USD",
-      description: "Free and open-source community edition",
-    },
+    offers: [
+      {
+        "@type": "Offer",
+        name: "Community",
+        price: "0",
+        priceCurrency: "INR",
+        description: "Free and open-source local CLI",
+      },
+      {
+        "@type": "Offer",
+        name: "Plus",
+        price: "499",
+        priceCurrency: "INR",
+        description: "AI access and affordable cloud execution for individual developers",
+      },
+      {
+        "@type": "Offer",
+        name: "Pro",
+        price: "1499",
+        priceCurrency: "INR",
+        description: "Expanded AI credits, cloud execution and professional integrations",
+      },
+    ],
     softwareHelp: {
       "@type": "WebPage",
       url: `${site.domain}/docs`,
@@ -351,16 +407,19 @@ const homepageJsonLd = [
     </div>
   </section>
 
-  <section class="section-grid py-16">
+  <section id="pricing" class="section-grid scroll-mt-24 py-16">
     <SectionHeading
-      eyebrow="Product Philosophy"
-      title="Free for developers. Powerful for teams."
-      description="KiduCode’s core developer experience will stay open-source. Future paid offerings may focus on cloud sync, team workspaces, audit logs, enterprise controls, private deployment, and priority support."
+      eyebrow="Pricing"
+      title="KiduCode Pricing"
+      description="Start free with the local CLI, then add AI credits, cloud execution, integrations and team controls as your needs grow."
       align="center"
     />
-    <div class="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+    <div class="mt-10 grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-3">
       {pricing.map((tier) => <PricingCard {...tier} />)}
     </div>
+    <p class="mt-5 text-center text-sm text-slate-500">
+      Prices exclude applicable GST.
+    </p>
   </section>
 
   <section class="section-grid py-16">
